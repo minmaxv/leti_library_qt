@@ -1,5 +1,5 @@
 #include "mainwindow.h"
-#include <src/database.cpp>
+#include <src/database.h>
 
 #include <QApplication>
 
@@ -8,7 +8,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     MainWindow w;
-    DataBase db = DataBase();
+    LibraryDataBase db = LibraryDataBase();
     db.openDB();
     db.createTables();
     db.showTable("books");

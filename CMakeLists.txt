@@ -21,6 +21,7 @@ set(llibqt_sources
 
 set(llibqt_headers
         src/mainwindow.h
+        src/database.h
         )
 
 set(llibqt_ui
