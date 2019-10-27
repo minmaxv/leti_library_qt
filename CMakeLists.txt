@@ -11,7 +11,7 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Qt5 COMPONENTS Widgets REQUIRED)
+find_package(Qt5 COMPONENTS Widgets Core Quick Sql REQUIRED)
 
 
 set(llibqt_sources
@@ -35,4 +35,4 @@ add_executable(leti_library_qt
 
 
 target_include_directories(leti_library_qt PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src")
-target_link_libraries(leti_library_qt PRIVATE Qt5::Widgets)
+target_link_libraries(leti_library_qt PRIVATE Qt5::Widgets Qt5::Core Qt5::Quick Qt5::Sql)
