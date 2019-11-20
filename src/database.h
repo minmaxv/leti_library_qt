@@ -9,10 +9,12 @@ class LibraryDataBase {
 public:
     QSqlTableModel *model;
     QSqlQuery *query;
+    QTableView *view;
     QMap <QString, int> maptables;
     bool err;
 
     LibraryDataBase();
+    ~LibraryDataBase();
 
     void initDB();
     void createTables();

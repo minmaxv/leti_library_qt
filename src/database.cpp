@@ -5,9 +5,16 @@ LibraryDataBase::LibraryDataBase() {
     initDB();
 }
 
+LibraryDataBase::~LibraryDataBase() {
+    delete model;
+    delete query;
+    delete view;
+}
+
 void LibraryDataBase::initDB() {
     db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName("library.db");
+    view = new QTableView;
     model = new QSqlTableModel;
     query = new QSqlQuery;
     maptables["autors"] = 0;
@@ -67,44 +74,22 @@ void LibraryDataBase::createTables() {
 }
 
 void LibraryDataBase::showTable(QString table) {
-    QTableView *view = new QTableView;
     model->setTable(table);
     model->select();
     model->setEditStrategy(QSqlTableModel::OnFieldChange);
     view->setModel(model);
     view->show();
 }
-// или я тупой, или в плюсах нет нормального форматирования строк и придется заниматься чем то странным
-// да и в принципе я не нашел нормального способа вставлять в бд записи, кроме как через sql запросы
+
 void LibraryDataBase::insertRecord(QString table, QMap<QString, QString> kwargs) {
-    switch(maptables[table]) {
-        case 0:
-            err = query->exec(QString("INSERT into %1(first_name, last_name)" // значение должно быть в одинарных кавычках если это строка иначе гг
-                                      "VALUES ('%2', '%3');").arg(table).arg(kwargs["first_name"])
-                                      .arg(kwargs["last_name"]));
-            if (!err)
-                qDebug() << query->lastError();
-            break;
-        case 1:
-            err = query->exec(QString("INSERT into %1(LBC_number, UDC_number, publication_year,"
-                                      " publication_place, title, amount)""VALUES ('%2', '%3', %4, '%5', '%6', %7);")
-                                      .arg(table).arg(kwargs["LBC_number"]).arg(kwargs["UDC_number"])
-                                      .arg(kwargs["publication_year"]).arg(kwargs["publication_place"])
-                                      .arg(kwargs["title"]).arg(kwargs["amount"]));
-            if (!err)
-                qDebug() << query->lastError();
-            break;
-        case 2:
-            err = query->exec(QString("INSERT into %1(passport_info, first_name, last_name,"
-                                      " card_type, phone_number, address, photo)""VALUES ('%2', '%3', '%4', '%5', '%6', '%7', '%8');")
-                                      .arg(table).arg(kwargs["passport_info"]).arg(kwargs["first_name"])
-                                      .arg(kwargs["last_name"]).arg(kwargs["card_type"])
-                                      .arg(kwargs["phone_number"]).arg(kwargs["address"]).arg(kwargs["photo"]));
-            if (!err)
-                qDebug() << query->lastError();
-            break;
-    default: break;
-    }
+    model->setTable(table);
+    QSqlRecord record = model->record();
+    for(auto i = kwargs.begin(); i != kwargs.end(); i++)
+        record.setValue(i.key(), i.value());
+    if (model->insertRecord(-1, record))
+        model->submitAll();
+    else
+        db.rollback();
 }
 
 void LibraryDataBase::openDB() {

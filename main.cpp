@@ -11,7 +11,11 @@ int main(int argc, char *argv[])
     LibraryDataBase db = LibraryDataBase();
     db.openDB();
     db.createTables();
-    db.showTable("books");
+    QMap <QString, QString> map;
+    map["first_name"] = "Lev";
+    map["last_name"] = "Tolstoy";
+    db.insertRecord("authors", map);
+    db.showTable("authors");
     w.show();
     return a.exec();
 }
