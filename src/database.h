@@ -16,6 +16,7 @@ public:
 
     void initDB();
     void createTables();
+    void dropAllTables();
     void showTable(QString table);
     void insertRecord(QString table, QMap<QString, QString> kwargs);
     QSqlTableModel* get_model(QString table);
