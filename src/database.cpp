@@ -36,8 +36,10 @@ void LibraryDataBase::createTables() {
     err = query->exec("CREATE TABLE IF NOT EXISTS book_author "
                "(book_id INTEGER, "
                "author_id INTEGER, "
-               "FOREIGN KEY(book_id) REFERENCES books(book_id), "
-               "FOREIGN KEY(author_id) REFERENCES authors(author_id), "
+               "FOREIGN KEY(book_id) REFERENCES books(book_id) "
+               "ON DELETE CASCADE ON UPDATE CASCADE, "
+               "FOREIGN KEY(author_id) REFERENCES authors(author_id) "
+               "ON DELETE CASCADE ON UPDATE CASCADE, "
                "CONSTRAINT new_pk PRIMARY KEY (book_id, author_id))");
     if (!err)
         qDebug() << query->lastError().text();
@@ -58,9 +60,29 @@ void LibraryDataBase::createTables() {
                "delivery_date DATE, "
                "return_date DATE, "
                "real_return_date DATE,"
-               "FOREIGN KEY(book_id) REFERENCES books(book_id), "
-               "FOREIGN KEY(card_id) REFERENCES library_cards(card_id), "
+               "FOREIGN KEY(book_id) REFERENCES books(book_id)"
+               "ON DELETE CASCADE ON UPDATE CASCADE, "
+               "FOREIGN KEY(card_id) REFERENCES library_cards(card_id)"
+               "ON DELETE CASCADE ON UPDATE CASCADE, "
                "CONSTRAINT new_pk PRIMARY KEY (book_id, card_id))");
+    if (!err)
+        qDebug() << query->lastError().text();
+}
+
+void LibraryDataBase::dropAllTables() {
+    err = query->exec("DROP TABLE IF EXISTS books");
+    if (!err)
+        qDebug() << query->lastError().text();
+    err = query->exec("DROP TABLE IF EXISTS authors");
+    if (!err)
+        qDebug() << query->lastError().text();
+    err = query->exec("DROP TABLE IF EXISTS library_cards");
+    if (!err)
+        qDebug() << query->lastError().text();
+    err = query->exec("DROP TABLE IF EXISTS book_out");
+    if (!err)
+        qDebug() << query->lastError().text();
+    err = query->exec("DROP TABLE IF EXISTS book_author");
     if (!err)
         qDebug() << query->lastError().text();
 }
