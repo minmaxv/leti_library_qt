@@ -53,7 +53,6 @@
      <string>PushButton</string>
     </property>
    </widget>
-  </widget>
   <widget class="QWidget" name="centralwidget"/>
    <property name="geometry">
     <rect>
@@ -64,7 +63,6 @@
     </rect>
    </property>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
  <connections/>
