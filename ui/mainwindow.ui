@@ -54,7 +54,7 @@
     </property>
    </widget>
   </widget>
-  <widget class="QMenuBar" name="menubar">
+  <widget class="QWidget" name="centralwidget"/>
    <property name="geometry">
     <rect>
      <x>0</x>

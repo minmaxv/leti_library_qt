@@ -7,19 +7,19 @@
 class LibraryDataBase {
 
 public:
-    QSqlTableModel *model;
     QSqlQuery *query;
     QTableView *view;
-    QMap <QString, int> maptables;
+    QSqlTableModel *model;
     bool err;
 
     LibraryDataBase();
-    ~LibraryDataBase();
 
     void initDB();
     void createTables();
+    void dropAllTables();
     void showTable(QString table);
     void insertRecord(QString table, QMap<QString, QString> kwargs);
+    QSqlTableModel* get_model(QString table);
     void openDB();
     void closeDB();
 

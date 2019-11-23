@@ -2,6 +2,7 @@
 
 #include <QMainWindow>
 #include "reader_dialog.h"
+#include <database.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -14,6 +15,10 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow() override;
+    LibraryDataBase db;
+
+
+private slots:
 
 private slots:
     void on_pushButton_readers_clicked();
