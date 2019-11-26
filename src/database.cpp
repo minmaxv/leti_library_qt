@@ -4,8 +4,9 @@
 LibraryDataBase::LibraryDataBase() {
     db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName("library.db");
-    if (db.isValid())
+    if (db.isValid()) {
         qDebug() << "Driver is valid";
+    }
     view = new QTableView;
     query = new QSqlQuery;
     model = new QSqlTableModel;
@@ -106,15 +107,20 @@ void LibraryDataBase::showTable(const QString& table) {
     view->show();
 }
 
-void LibraryDataBase::insertRecord(QString table, QMap<QString, QString> kwargs) {
+void LibraryDataBase::insertRecord(const QString& table, const QMap<QString, QString>& records_to_set) {
     model->setTable(table);
+
     QSqlRecord record = model->record();
-    for(auto i = kwargs.begin(); i != kwargs.end(); i++)
-        record.setValue(i.key(), i.value());
-    if (model->insertRecord(-1, record))
+    for(auto records_iterator = records_to_set.cbegin(); records_iterator != records_to_set.cend(); ++records_iterator) {
+        record.setValue(records_iterator.key(), records_iterator.value());
+    } 
+
+    if (model->insertRecord(-1, record)) {
         model->submitAll();
-    else
+    }
+    else {
         db.rollback();
+    }
 }
 
 QSqlTableModel* LibraryDataBase::get_model(const QString& table) {
@@ -125,8 +131,9 @@ QSqlTableModel* LibraryDataBase::get_model(const QString& table) {
 }
 
 void LibraryDataBase::openDB() {
-    if (!db.open())
+    if (!db.open()) {
         qDebug() << db.lastError().text();
+    }
 }
 
 void LibraryDataBase::closeDB() {

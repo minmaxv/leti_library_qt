@@ -1,5 +1,4 @@
-#ifndef DATABASE_H
-#define DATABASE_H
+#pragma once
 
 #include <QtSql>
 #include <QTableView>
@@ -13,7 +12,7 @@ public:
     void createTables();
     void dropAllTables();
     void showTable(const QString& table);
-    void insertRecord(QString table, QMap<QString, QString> kwargs);
+    void insertRecord(const QString& table, const QMap<QString, QString>& kwargs);
     QSqlTableModel* get_model(const QString& table);
     void openDB();
     void closeDB();
@@ -27,4 +26,3 @@ private:
     QSqlDatabase db;
 };
 
-#endif // DATABASE_H
