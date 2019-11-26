@@ -1,12 +1,7 @@
 #include <database.h>
 #include <iostream>
 
-
 LibraryDataBase::LibraryDataBase() {
-    initDB();
-}
-
-void LibraryDataBase::initDB() {
     db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName("library.db");
     if (db.isValid())
@@ -26,14 +21,18 @@ void LibraryDataBase::createTables() {
                "publication_place VARCHAR(35), "
                "title VARCHAR(40), "
                "amount INTEGER)");
-    if (!err)
+    if (!err) {
         qDebug() << query->lastError().text();
+    }
+
     err = query->exec("CREATE TABLE IF NOT EXISTS authors "
                "(author_id INTEGER UNIQUE PRIMARY KEY AUTOINCREMENT, "
                "first_name VARCHAR(15), "
                "last_name VARCHAR(20))");
-    if (!err)
+    if (!err) {
         qDebug() << query->lastError().text();
+    }
+
     err = query->exec("CREATE TABLE IF NOT EXISTS book_author "
                "(book_id INTEGER, "
                "author_id INTEGER, "
@@ -42,8 +41,10 @@ void LibraryDataBase::createTables() {
                "FOREIGN KEY(author_id) REFERENCES authors(author_id) "
                "ON DELETE CASCADE ON UPDATE CASCADE, "
                "CONSTRAINT new_pk PRIMARY KEY (book_id, author_id))");
-    if (!err)
+    if (!err) {
         qDebug() << query->lastError().text();
+    }
+
     err = query->exec("CREATE TABLE IF NOT EXISTS library_cards "
                "(card_id INTEGER UNIQUE PRIMARY KEY AUTOINCREMENT, "
                "passport_info VARCHAR(40), "
@@ -53,8 +54,10 @@ void LibraryDataBase::createTables() {
                "phone_number VARCHAR(15), "
                "address VARCHAR(40), "
                "photo VARBINARY)");
-    if (!err)
+    if (!err) {
         qDebug() << query->lastError().text();
+    }
+
     err = query->exec("CREATE TABLE IF NOT EXISTS book_out "
                "(book_id INTEGER, "
                "card_id INTEGER, "
@@ -66,29 +69,39 @@ void LibraryDataBase::createTables() {
                "FOREIGN KEY(card_id) REFERENCES library_cards(card_id)"
                "ON DELETE CASCADE ON UPDATE CASCADE, "
                "CONSTRAINT new_pk PRIMARY KEY (book_id, card_id))");
-    if (!err)
+    if (!err) {
         qDebug() << query->lastError().text();
+    }
 }
 
 void LibraryDataBase::dropAllTables() {
     err = query->exec("DROP TABLE IF EXISTS books");
-    if (!err)
+    if (!err) {
         qDebug() << query->lastError().text();
+    }
+
     err = query->exec("DROP TABLE IF EXISTS authors");
-    if (!err)
+    if (!err) {
         qDebug() << query->lastError().text();
+    }
+
     err = query->exec("DROP TABLE IF EXISTS library_cards");
-    if (!err)
+    if (!err) {
         qDebug() << query->lastError().text();
+    }
+
     err = query->exec("DROP TABLE IF EXISTS book_out");
-    if (!err)
+    if (!err) {
         qDebug() << query->lastError().text();
+    }
+
     err = query->exec("DROP TABLE IF EXISTS book_author");
-    if (!err)
+    if (!err) {
         qDebug() << query->lastError().text();
+    }
 }
 
-void LibraryDataBase::showTable(QString table) {
+void LibraryDataBase::showTable(const QString& table) {
     view->setModel(get_model(table));
     view->show();
 }
@@ -104,7 +117,7 @@ void LibraryDataBase::insertRecord(QString table, QMap<QString, QString> kwargs)
         db.rollback();
 }
 
-QSqlTableModel* LibraryDataBase::get_model(QString table) {
+QSqlTableModel* LibraryDataBase::get_model(const QString& table) {
     model->setTable(table);
     model->select();
     model->setEditStrategy(QSqlTableModel::OnFieldChange);
@@ -117,8 +130,9 @@ void LibraryDataBase::openDB() {
 }
 
 void LibraryDataBase::closeDB() {
-    if (!db.open())
-        qDebug() << db.lastError().text();
+    db.close();
 }
 
-
+bool LibraryDataBase::get_error() const {
+    return err;
+}
