@@ -22,12 +22,12 @@ make
 TODO
 -----
 
-* Delete readers
-* Search readers
-* Join autors and books
-* Search autors
-* Search books
-* Add book
-* Delete book
-* Add autor
-* Delete autor
+- [  ] Delete readers
+- [  ] Search readers
+- [  ] Join autors and books
+- [  ] Search autors
+- [  ] Search books
+- [  ] Add book
+- [  ] Delete book
+- [  ] Add autor
+- [  ] Delete autor
