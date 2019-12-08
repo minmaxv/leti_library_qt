@@ -2,6 +2,7 @@
 
 #include <QMainWindow>
 #include <QStackedWidget>
+#include <QTableView>
 #include <database.h>
 
 QT_BEGIN_NAMESPACE
@@ -22,6 +23,10 @@ private slots:
 
 private slots:
     void on_readers_button_clicked();
+
+    void on_publish_reader_clicked();
+
+    void on_to_new_reader_clicked();
 
 private:
     Ui::MainWindow *ui;
