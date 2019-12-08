@@ -1,5 +1,4 @@
 # Leti Library Qt
------
 Information system for library functioning automation.
 
 Qt Modules Used
