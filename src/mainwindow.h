@@ -1,7 +1,7 @@
 #pragma once
 
 #include <QMainWindow>
-#include "reader_dialog.h"
+#include <QStackedWidget>
 #include <database.h>
 
 QT_BEGIN_NAMESPACE
@@ -17,13 +17,13 @@ public:
     ~MainWindow() override;
     LibraryDataBase db;
 
+private slots:
+    void on_books_button_clicked();
 
 private slots:
-
-private slots:
-    void on_pushButton_readers_clicked();
+    void on_readers_button_clicked();
 
 private:
     Ui::MainWindow *ui;
-    reader_dialog *reader_d;
+
 };

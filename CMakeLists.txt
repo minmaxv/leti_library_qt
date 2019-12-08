@@ -18,18 +18,15 @@ find_package(Qt5 COMPONENTS Widgets Core Quick Sql REQUIRED)
 set(llibqt_sources
         src/mainwindow.cpp
         src/database.cpp
-        src/reader_dialog.cpp
         )
 
 set(llibqt_headers
         src/mainwindow.h
         src/database.h
-        src/reader_dialog.h
         )
 
 set(llibqt_ui
         ui/mainwindow.ui
-        ui/reader_dialog.ui
         )
 
 add_executable(leti_library_qt
