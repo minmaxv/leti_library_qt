@@ -19,14 +19,11 @@ public:
     LibraryDataBase db;
 
 private slots:
-    void on_books_button_clicked();
-
-private slots:
-    void on_readers_button_clicked();
-
-    void on_publish_reader_clicked();
-
+    void on_readersButton_clicked();
+    void on_publishReader_clicked();
     void on_to_new_reader_clicked();
+    void on_booksButton_clicked();
+    void on_mainmenuButton_clicked();
 
 private:
     Ui::MainWindow *ui;

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>436</width>
-    <height>323</height>
+    <width>588</width>
+    <height>479</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,19 +19,22 @@
      <rect>
       <x>10</x>
       <y>0</y>
-      <width>401</width>
-      <height>251</height>
+      <width>561</width>
+      <height>351</height>
      </rect>
     </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="page">
-     <widget class="QPushButton" name="readers_button">
+     <widget class="QPushButton" name="readersButton">
       <property name="geometry">
        <rect>
-        <x>50</x>
-        <y>110</y>
+        <x>100</x>
+        <y>130</y>
         <width>121</width>
         <height>41</height>
        </rect>
@@ -40,11 +43,11 @@
        <string>Читатели</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="books_button">
+     <widget class="QPushButton" name="booksButton">
       <property name="geometry">
        <rect>
-        <x>230</x>
-        <y>110</y>
+        <x>320</x>
+        <y>130</y>
         <width>121</width>
         <height>41</height>
        </rect>
@@ -58,10 +61,10 @@
      <widget class="QTableView" name="tableView">
       <property name="geometry">
        <rect>
-        <x>140</x>
-        <y>20</y>
-        <width>256</width>
-        <height>192</height>
+        <x>240</x>
+        <y>10</y>
+        <width>291</width>
+        <height>331</height>
        </rect>
       </property>
      </widget>
@@ -69,13 +72,14 @@
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>30</y>
+        <y>10</y>
         <width>101</width>
         <height>61</height>
        </rect>
       </property>
       <property name="text">
-       <string>New reader</string>
+       <string>Добавить
+ читателя</string>
       </property>
      </widget>
     </widget>
@@ -257,14 +261,30 @@
      </widget>
     </widget>
    </widget>
+   <widget class="QPushButton" name="mainmenuButton">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>360</y>
+      <width>141</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Главное меню</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>436</width>
-     <height>21</height>
+     <width>588</width>
+     <height>26</height>
     </rect>
    </property>
   </widget>
