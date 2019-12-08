@@ -20,10 +20,11 @@ public:
 
 private slots:
     void on_readersButton_clicked();
-    void on_publishReader_clicked();
-    void on_to_new_reader_clicked();
+    void on_addReaderToDBButton_clicked();
+    void on_addReaderButton_clicked();
     void on_booksButton_clicked();
     void on_mainmenuButton_clicked();
+    void on_cancelReaderAdditionButton_clicked();
 
 private:
     Ui::MainWindow *ui;

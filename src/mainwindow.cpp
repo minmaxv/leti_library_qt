@@ -23,15 +23,17 @@ enum class Pages {
 
 void MainWindow::on_readersButton_clicked() {
     ui->stackedWidget->setCurrentIndex(static_cast<int>(Pages::READERS));
-    ui->tableView->setModel(db.get_model("library_cards"));
-    ui->tableView->show();
+    ui->readersView->setModel(db.get_model("library_cards"));
+    ui->readersView->show();
 }
 
 void MainWindow::on_booksButton_clicked() {
     ui->stackedWidget->setCurrentIndex(static_cast<int>(Pages::BOOKS));
+    ui->booksView->setModel(db.get_model("books"));
+    ui->booksView->show();
 }
 
-void MainWindow::on_publishReader_clicked() {
+void MainWindow::on_addReaderToDBButton_clicked() {
     QMap <QString, QString> new_reader;
     new_reader["first_name"] = ui->first_name->text();
     new_reader["last_name"] = ui->last_name->text();
@@ -48,10 +50,14 @@ void MainWindow::on_publishReader_clicked() {
     on_readersButton_clicked();
 }
 
-void MainWindow::on_to_new_reader_clicked() {
+void MainWindow::on_addReaderButton_clicked() {
     ui->stackedWidget->setCurrentIndex(static_cast<int>(Pages::NEW_READER));
 }
 
 void MainWindow::on_mainmenuButton_clicked() {
     ui->stackedWidget->setCurrentIndex(static_cast<int>(Pages::MAIN));
+}
+
+void MainWindow::on_cancelReaderAdditionButton_clicked() {
+    ui->stackedWidget->setCurrentIndex(static_cast<int>(Pages::READERS));
 }
