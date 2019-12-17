@@ -12,7 +12,7 @@ public:
     void createTables();
     void dropAllTables();
     void showTable(const QString& table);
-    void insertRecord(const QString& table, const QMap<QString, QString>& kwargs);
+    void insertRecord(const QString& table, const QMap<QString, QString>& kwargs, const QByteArray photo);
     QSqlTableModel* get_model(const QString& table);
     void openDB();
     void closeDB();
