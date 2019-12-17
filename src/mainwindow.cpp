@@ -35,18 +35,20 @@ void MainWindow::on_booksButton_clicked() {
 
 void MainWindow::on_addReaderToDBButton_clicked() {
     QMap <QString, QString> new_reader;
+    QImage image(ui->photo_label->text());
+    QByteArray photo;
+    QBuffer buffer(&photo);
+    buffer.open(QIODevice::WriteOnly);
+    image.save(&buffer, "jpg");
     new_reader["first_name"] = ui->first_name->text();
     new_reader["last_name"] = ui->last_name->text();
-    //TODO: find out how to store photos
-    new_reader["photo"] = ui->photo->text();
     new_reader["address"] = ui->address->text();
     new_reader["phone_number"] = ui->phone_number->text();
     //TODO: make card_type field as a popout menu or smth like this, because
     //we have only 3 different types of cards
     new_reader["card_type"] = ui->card_type->text();
     new_reader["passport_info"] = ui->passport_info->text();
-    db.insertRecord("library_cards", new_reader);
-//    ui->stackedWidget->setCurrentIndex(static_cast<int>(Pages::READERS));
+    db.insertRecord("library_cards", new_reader, photo);
     on_readersButton_clicked();
 }
 
@@ -60,4 +62,12 @@ void MainWindow::on_mainmenuButton_clicked() {
 
 void MainWindow::on_cancelReaderAdditionButton_clicked() {
     ui->stackedWidget->setCurrentIndex(static_cast<int>(Pages::READERS));
+}
+
+void MainWindow::on_photo_input_clicked()
+{
+    QString filename = QFileDialog::getOpenFileName(this, tr("Open File"), "", tr("Images (*.png *.jpg)"));
+    if (filename!=""){
+        ui->photo_label->setText(filename);
+    }
 }

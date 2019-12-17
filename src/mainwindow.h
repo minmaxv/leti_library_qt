@@ -3,6 +3,7 @@
 #include <QMainWindow>
 #include <QStackedWidget>
 #include <QTableView>
+#include <QFileDialog>
 #include <database.h>
 
 QT_BEGIN_NAMESPACE
@@ -25,6 +26,8 @@ private slots:
     void on_booksButton_clicked();
     void on_mainmenuButton_clicked();
     void on_cancelReaderAdditionButton_clicked();
+
+    void on_photo_input_clicked();
 
 private:
     Ui::MainWindow *ui;

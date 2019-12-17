@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>594</width>
-    <height>472</height>
+    <width>609</width>
+    <height>501</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -27,7 +27,7 @@
      <enum>QFrame::StyledPanel</enum>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="MainPage">
      <widget class="QPushButton" name="readersButton">
@@ -207,18 +207,25 @@
           </layout>
          </item>
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout">
-           <item>
-            <widget class="QLabel" name="label_7">
-             <property name="text">
-              <string>Фото</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLineEdit" name="photo"/>
-           </item>
-          </layout>
+          <layout class="QHBoxLayout" name="horizontalLayout"/>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_9">
+         <item alignment="Qt::AlignRight">
+          <widget class="QLabel" name="photo_label">
+           <property name="text">
+            <string>Файл не выбран</string>
+           </property>
+          </widget>
+         </item>
+         <item alignment="Qt::AlignLeft">
+          <widget class="QPushButton" name="photo_input">
+           <property name="text">
+            <string>Выбрать файл с фотографией</string>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
@@ -266,8 +273,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>594</width>
-     <height>26</height>
+     <width>609</width>
+     <height>21</height>
     </rect>
    </property>
   </widget>

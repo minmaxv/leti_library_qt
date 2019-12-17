@@ -54,7 +54,7 @@ void LibraryDataBase::createTables() {
                "card_type VARCHAR(10), "
                "phone_number VARCHAR(15), "
                "address VARCHAR(40), "
-               "photo VARBINARY)");
+               "photo BLOB)");
     if (!err) {
         qDebug() << query->lastError().text();
     }
@@ -107,13 +107,18 @@ void LibraryDataBase::showTable(const QString& table) {
     view->show();
 }
 
-void LibraryDataBase::insertRecord(const QString& table, const QMap<QString, QString>& records_to_set) {
+void LibraryDataBase::insertRecord(const QString& table,
+                                   const QMap<QString, QString>& records_to_set,
+                                   const QByteArray photo = nullptr) {
     model->setTable(table);
 
     QSqlRecord record = model->record();
     for(auto records_iterator = records_to_set.cbegin(); records_iterator != records_to_set.cend(); ++records_iterator) {
         record.setValue(records_iterator.key(), records_iterator.value());
-    } 
+    }
+    if (photo!=nullptr) {
+        record.setValue("photo", photo);
+    }
 
     if (model->insertRecord(-1, record)) {
         model->submitAll();
