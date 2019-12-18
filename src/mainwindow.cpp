@@ -45,9 +45,7 @@ void MainWindow::on_addReaderToDBButton_clicked() {
     new_reader["last_name"] = ui->last_name->text();
     new_reader["address"] = ui->address->text();
     new_reader["phone_number"] = ui->phone_number->text();
-    //TODO: make card_type field as a popout menu or smth like this, because
-    //we have only 3 different types of cards
-    new_reader["card_type"] = ui->card_type->text();
+    new_reader["card_type"] = ui->card_type->currentText();
     new_reader["passport_info"] = ui->passport_info->text();
     db.insertRecord("library_cards", new_reader, photo);
     on_readersButton_clicked();
