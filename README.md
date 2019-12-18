@@ -22,8 +22,8 @@ make
 TODO
 -----
 
-- [X] Delete readers
-- [X] Search readers
+- [x] Delete readers
+- [x] Search readers
 - [ ] Search autors
 - [ ] Search books
 - [ ] Add book
