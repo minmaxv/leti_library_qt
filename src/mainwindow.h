@@ -27,7 +27,13 @@ private slots:
     void on_mainmenuButton_clicked();
     void on_cancelReaderAdditionButton_clicked();
 
-    void on_photo_input_clicked();
+    void on_photoInputButton_clicked();
+
+    void on_backToReadersButton_clicked();
+
+    void on_findReaderButton_clicked();
+
+    void on_FindReaderByIdButton_clicked();
 
 private:
     Ui::MainWindow *ui;
