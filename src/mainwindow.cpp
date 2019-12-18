@@ -74,12 +74,13 @@ void MainWindow::on_photoInputButton_clicked()
 
 void MainWindow::on_backToReadersButton_clicked()
 {
-    ui->stackedWidget->setCurrentIndex(static_cast<int>(Pages::READERS));
+    on_readersButton_clicked();
 }
 
 void MainWindow::on_findReaderButton_clicked()
 {
     ui->idLineEdit->setText("");
+    ui->readerCard_Id->setText("");
     ui->firstNameOfReader->setText("");
     ui->lastNameOfReader->setText("");
     ui->cardTypeOfReader->setText("");
@@ -88,6 +89,7 @@ void MainWindow::on_findReaderButton_clicked()
     ui->addressOfReader->setText("");
     ui->photoOfReader->setScene(nullptr);
     ui->photoOfReader->setVisible(false);
+    ui->deleteReaderButton->setVisible(false);
     ui->stackedWidget->setCurrentIndex(static_cast<int>(Pages::FIND_READER));
 }
 
@@ -100,6 +102,7 @@ void MainWindow::on_FindReaderByIdButton_clicked()
         model->select();
         if (model->rowCount()) {
             QSqlRecord record = model->record(0);
+            ui->readerCard_Id->setText(record.value("card_id").toString());
             ui->firstNameOfReader->setText(record.value("first_name").toString());
             ui->lastNameOfReader->setText(record.value("last_name").toString());
             ui->cardTypeOfReader->setText(record.value("card_type").toString());
@@ -112,6 +115,7 @@ void MainWindow::on_FindReaderByIdButton_clicked()
             ui->photoOfReader->setScene(scene);
             scene->addPixmap(QPixmap::fromImage(image));
             ui->photoOfReader->fitInView(scene->sceneRect(), Qt::KeepAspectRatio);
+            ui->deleteReaderButton->setVisible(true);
         }
         else {
             QDialog *messageDialog = new QDialog;
@@ -126,4 +130,12 @@ void MainWindow::on_FindReaderByIdButton_clicked()
             messageDialog->exec();
         }
     }
+}
+
+void MainWindow::on_deleteReaderButton_clicked()
+{
+    QMap <QString, QString> id;
+    id["card_id"] = ui->readerCard_Id->text();
+    db.deleteRecord("library_cards", id);
+    on_readersButton_clicked();
 }
