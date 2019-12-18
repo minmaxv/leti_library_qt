@@ -128,6 +128,13 @@ void LibraryDataBase::insertRecord(const QString& table,
     }
 }
 
+void LibraryDataBase::deleteRecord(const QString& table, const QMap<QString, QString>& id) {
+    model->setTable(table);
+    model->setFilter(id.firstKey() + "=" + id.first());
+    model->select();
+    model->removeRow(0);
+}
+
 QSqlTableModel* LibraryDataBase::get_model(const QString& table) {
     model->setTable(table);
     model->select();

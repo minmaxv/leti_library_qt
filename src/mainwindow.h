@@ -35,6 +35,8 @@ private slots:
 
     void on_FindReaderByIdButton_clicked();
 
+    void on_deleteReaderButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 
