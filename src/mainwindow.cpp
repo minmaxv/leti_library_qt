@@ -5,6 +5,7 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
         db.openDB();
         db.createTables();
+        this->setFixedSize(609, 501);
         ui->setupUi(this);
         ui->stackedWidget->setCurrentIndex(0);
     }
@@ -86,26 +87,43 @@ void MainWindow::on_findReaderButton_clicked()
     ui->passportInfoOfReader->setText("");
     ui->addressOfReader->setText("");
     ui->photoOfReader->setScene(nullptr);
+    ui->photoOfReader->setVisible(false);
     ui->stackedWidget->setCurrentIndex(static_cast<int>(Pages::FIND_READER));
 }
 
 void MainWindow::on_FindReaderByIdButton_clicked()
 {
-    QSqlTableModel *model = new QSqlTableModel;
-    model->setTable("library_cards");
-    model->setFilter("card_id="+ ui->idLineEdit->text());
-    model->select();
-    QSqlRecord record = model->record(0);
-    ui->firstNameOfReader->setText(record.value("first_name").toString());
-    ui->lastNameOfReader->setText(record.value("last_name").toString());
-    ui->cardTypeOfReader->setText(record.value("card_type").toString());
-    ui->phoneNumberOfReader->setText(record.value("phone_number").toString());
-    ui->passportInfoOfReader->setText(record.value("passport_info").toString());
-    ui->addressOfReader->setText(record.value("address").toString());
-    QImage image = QImage::fromData(record.value("photo").toByteArray(), "jpg");
-    QGraphicsScene *scene = new QGraphicsScene;
-    ui->photoOfReader->setScene(scene);
-    scene->addPixmap(QPixmap::fromImage(image));
-    ui->photoOfReader->fitInView(scene->sceneRect(), Qt::KeepAspectRatio);
-
+    if (ui->idLineEdit->text() != "") {
+        QSqlTableModel *model = new QSqlTableModel;
+        model->setTable("library_cards");
+        model->setFilter("card_id="+ ui->idLineEdit->text());
+        model->select();
+        if (model->rowCount()) {
+            QSqlRecord record = model->record(0);
+            ui->firstNameOfReader->setText(record.value("first_name").toString());
+            ui->lastNameOfReader->setText(record.value("last_name").toString());
+            ui->cardTypeOfReader->setText(record.value("card_type").toString());
+            ui->phoneNumberOfReader->setText(record.value("phone_number").toString());
+            ui->passportInfoOfReader->setText(record.value("passport_info").toString());
+            ui->addressOfReader->setText(record.value("address").toString());
+            QImage image = QImage::fromData(record.value("photo").toByteArray(), "jpg");
+            QGraphicsScene *scene = new QGraphicsScene;
+            ui->photoOfReader->setVisible(true);
+            ui->photoOfReader->setScene(scene);
+            scene->addPixmap(QPixmap::fromImage(image));
+            ui->photoOfReader->fitInView(scene->sceneRect(), Qt::KeepAspectRatio);
+        }
+        else {
+            QDialog *messageDialog = new QDialog;
+            QLabel *messageLabel = new QLabel;
+            QHBoxLayout *messageLayout = new QHBoxLayout();
+            messageDialog->setFixedSize(250, 150);
+            messageDialog->setWindowTitle("Warning");
+            messageLabel->setText("Нет читателя с таким id");
+            messageLabel->setAlignment(Qt::AlignCenter);
+            messageLayout->addWidget(messageLabel);
+            messageDialog->setLayout(messageLayout);
+            messageDialog->exec();
+        }
+    }
 }
