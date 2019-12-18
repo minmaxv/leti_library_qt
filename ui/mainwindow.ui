@@ -27,7 +27,7 @@
      <enum>QFrame::StyledPanel</enum>
     </property>
     <property name="currentIndex">
-     <number>4</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="MainPage">
      <widget class="QPushButton" name="readersButton">
@@ -137,7 +137,7 @@
         <layout class="QVBoxLayout" name="verticalLayout">
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_6">
-           <item>
+           <item alignment="Qt::AlignLeft">
             <widget class="QLabel" name="label_5">
              <property name="text">
               <string>Тип билета</string>
@@ -145,7 +145,37 @@
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="card_type"/>
+            <widget class="QComboBox" name="card_type">
+             <item>
+              <property name="text">
+               <string>Постоянный</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Разовый</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Временный</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_10">
+           <item>
+            <widget class="QLabel" name="label_7">
+             <property name="text">
+              <string>Имя</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="first_name"/>
            </item>
           </layout>
          </item>
@@ -174,20 +204,6 @@
            </item>
            <item>
             <widget class="QLineEdit" name="address"/>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_3">
-           <item>
-            <widget class="QLabel" name="label_2">
-             <property name="text">
-              <string>Имя</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLineEdit" name="first_name"/>
            </item>
           </layout>
          </item>
