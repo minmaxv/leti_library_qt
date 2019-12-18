@@ -37,6 +37,12 @@ private slots:
 
     void on_deleteReaderButton_clicked();
 
+    void on_addBookToDBButton_clicked();
+
+    void on_addBookButton_2_clicked();
+
+    void on_cancelBookAddButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 

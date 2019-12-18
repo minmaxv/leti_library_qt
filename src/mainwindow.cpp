@@ -20,16 +20,29 @@ enum class Pages {
     READERS,
     BOOKS,
     NEW_READER,
-    FIND_READER
+    FIND_READER,
+    NEW_BOOK
 };
 
 void MainWindow::on_readersButton_clicked() {
+    ui->first_name->clear();
+    ui->last_name->clear();
+    ui->address->clear();
+    ui->phone_number->clear();
+    ui->card_type->setCurrentText("Постоянный");
+    ui->passport_info->clear();
     ui->stackedWidget->setCurrentIndex(static_cast<int>(Pages::READERS));
     ui->readersView->setModel(db.get_model("library_cards"));
     ui->readersView->show();
 }
 
 void MainWindow::on_booksButton_clicked() {
+    ui->bookTitle->clear();
+    ui->bookYear->clear();
+    ui->bookPlace->clear();
+    ui->bookLBC->clear();
+    ui->bookUDC->clear();
+    ui->bookAmount->clear();
     ui->stackedWidget->setCurrentIndex(static_cast<int>(Pages::BOOKS));
     ui->booksView->setModel(db.get_model("books"));
     ui->booksView->show();
@@ -79,14 +92,14 @@ void MainWindow::on_backToReadersButton_clicked()
 
 void MainWindow::on_findReaderButton_clicked()
 {
-    ui->idLineEdit->setText("");
-    ui->readerCard_Id->setText("");
-    ui->firstNameOfReader->setText("");
-    ui->lastNameOfReader->setText("");
-    ui->cardTypeOfReader->setText("");
-    ui->phoneNumberOfReader->setText("");
-    ui->passportInfoOfReader->setText("");
-    ui->addressOfReader->setText("");
+    ui->idLineEdit->clear();
+    ui->readerCard_Id->clear();
+    ui->firstNameOfReader->clear();
+    ui->lastNameOfReader->clear();
+    ui->cardTypeOfReader->clear();
+    ui->phoneNumberOfReader->clear();
+    ui->passportInfoOfReader->clear();
+    ui->addressOfReader->clear();
     ui->photoOfReader->setScene(nullptr);
     ui->photoOfReader->setVisible(false);
     ui->deleteReaderButton->setVisible(false);
@@ -138,4 +151,27 @@ void MainWindow::on_deleteReaderButton_clicked()
     id["card_id"] = ui->readerCard_Id->text();
     db.deleteRecord("library_cards", id);
     on_readersButton_clicked();
+}
+
+void MainWindow::on_addBookToDBButton_clicked()
+{
+    QMap <QString, QString> newBook;
+    newBook["title"] = ui->bookTitle->text();
+    newBook["publication_year"] = ui->bookYear->text();
+    newBook["publication_place"] = ui->bookPlace->text();
+    newBook["LBC_number"] = ui->bookLBC->text();
+    newBook["UDC_number"] = ui->bookUDC->text();
+    newBook["amount"] = ui->bookAmount->text();
+    db.insertRecord("books", newBook);
+    on_booksButton_clicked();
+}
+
+void MainWindow::on_addBookButton_2_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(static_cast<int>(Pages::NEW_BOOK));
+}
+
+void MainWindow::on_cancelBookAddButton_clicked()
+{
+    on_booksButton_clicked();
 }
