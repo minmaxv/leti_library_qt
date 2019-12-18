@@ -18,7 +18,8 @@ enum class Pages {
     MAIN = 0,
     READERS,
     BOOKS,
-    NEW_READER
+    NEW_READER,
+    FIND_READER
 };
 
 void MainWindow::on_readersButton_clicked() {
@@ -35,7 +36,7 @@ void MainWindow::on_booksButton_clicked() {
 
 void MainWindow::on_addReaderToDBButton_clicked() {
     QMap <QString, QString> new_reader;
-    QImage image(ui->photo_label->text());
+    QImage image(ui->photoLabel->text());
     QByteArray photo;
     QBuffer buffer(&photo);
     buffer.open(QIODevice::WriteOnly);
@@ -64,10 +65,49 @@ void MainWindow::on_cancelReaderAdditionButton_clicked() {
     ui->stackedWidget->setCurrentIndex(static_cast<int>(Pages::READERS));
 }
 
-void MainWindow::on_photo_input_clicked()
+void MainWindow::on_photoInputButton_clicked()
 {
     QString filename = QFileDialog::getOpenFileName(this, tr("Open File"), "", tr("Images (*.png *.jpg)"));
     if (filename!=""){
-        ui->photo_label->setText(filename);
+        ui->photoLabel->setText(filename);
     }
+}
+
+void MainWindow::on_backToReadersButton_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(static_cast<int>(Pages::READERS));
+}
+
+void MainWindow::on_findReaderButton_clicked()
+{
+    ui->idLineEdit->setText("");
+    ui->firstNameOfReader->setText("");
+    ui->lastNameOfReader->setText("");
+    ui->cardTypeOfReader->setText("");
+    ui->phoneNumberOfReader->setText("");
+    ui->passportInfoOfReader->setText("");
+    ui->addressOfReader->setText("");
+    ui->photoOfReader->setScene(nullptr);
+    ui->stackedWidget->setCurrentIndex(static_cast<int>(Pages::FIND_READER));
+}
+
+void MainWindow::on_FindReaderByIdButton_clicked()
+{
+    QSqlTableModel *model = new QSqlTableModel;
+    model->setTable("library_cards");
+    model->setFilter("card_id="+ ui->idLineEdit->text());
+    model->select();
+    QSqlRecord record = model->record(0);
+    ui->firstNameOfReader->setText(record.value("first_name").toString());
+    ui->lastNameOfReader->setText(record.value("last_name").toString());
+    ui->cardTypeOfReader->setText(record.value("card_type").toString());
+    ui->phoneNumberOfReader->setText(record.value("phone_number").toString());
+    ui->passportInfoOfReader->setText(record.value("passport_info").toString());
+    ui->addressOfReader->setText(record.value("address").toString());
+    QImage image = QImage::fromData(record.value("photo").toByteArray(), "jpg");
+    QGraphicsScene *scene = new QGraphicsScene;
+    ui->photoOfReader->setScene(scene);
+    scene->addPixmap(QPixmap::fromImage(image));
+    ui->photoOfReader->fitInView(scene->sceneRect(), Qt::KeepAspectRatio);
+
 }

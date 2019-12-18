@@ -27,7 +27,7 @@
      <enum>QFrame::StyledPanel</enum>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>4</number>
     </property>
     <widget class="QWidget" name="MainPage">
      <widget class="QPushButton" name="readersButton">
@@ -71,8 +71,8 @@
      <widget class="QPushButton" name="addReaderButton">
       <property name="geometry">
        <rect>
-        <x>20</x>
-        <y>10</y>
+        <x>10</x>
+        <y>30</y>
         <width>101</width>
         <height>61</height>
        </rect>
@@ -80,6 +80,19 @@
       <property name="text">
        <string>Добавить
  читателя</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="findReaderButton">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>100</y>
+        <width>101</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Найти читателя</string>
       </property>
      </widget>
     </widget>
@@ -214,14 +227,14 @@
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_9">
          <item alignment="Qt::AlignRight">
-          <widget class="QLabel" name="photo_label">
+          <widget class="QLabel" name="photoLabel">
            <property name="text">
             <string>Файл не выбран</string>
            </property>
           </widget>
          </item>
          <item alignment="Qt::AlignLeft">
-          <widget class="QPushButton" name="photo_input">
+          <widget class="QPushButton" name="photoInputButton">
            <property name="text">
             <string>Выбрать файл с фотографией</string>
            </property>
@@ -248,6 +261,105 @@
         </layout>
        </item>
       </layout>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="FindReaderPage">
+     <widget class="QPushButton" name="backToReadersButton">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>290</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Назад</string>
+      </property>
+     </widget>
+     <widget class="QWidget" name="formLayoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>30</y>
+        <width>301</width>
+        <height>251</height>
+       </rect>
+      </property>
+      <layout class="QFormLayout" name="formLayout">
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="idLineEdit"/>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="idLabel">
+         <property name="text">
+          <string>Id читателя</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QPushButton" name="FindReaderByIdButton">
+         <property name="text">
+          <string>Найти</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="firstNameOfReader">
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="lastNameOfReader">
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="passportInfoOfReader">
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0">
+        <widget class="QLabel" name="cardTypeOfReader">
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0">
+        <widget class="QLabel" name="phoneNumberOfReader">
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="0">
+        <widget class="QLabel" name="addressOfReader">
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QGraphicsView" name="photoOfReader">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>330</x>
+        <y>70</y>
+        <width>221</width>
+        <height>192</height>
+       </rect>
+      </property>
      </widget>
     </widget>
    </widget>
