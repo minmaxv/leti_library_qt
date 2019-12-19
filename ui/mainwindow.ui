@@ -801,7 +801,7 @@
       <property name="geometry">
        <rect>
         <x>280</x>
-        <y>70</y>
+        <y>120</y>
         <width>256</width>
         <height>192</height>
        </rect>
@@ -831,6 +831,51 @@
       </property>
       <property name="text">
        <string>Удалить книгу</string>
+      </property>
+     </widget>
+     <widget class="QWidget" name="formLayoutWidget_2">
+      <property name="geometry">
+       <rect>
+        <x>280</x>
+        <y>20</y>
+        <width>231</width>
+        <height>48</height>
+       </rect>
+      </property>
+      <layout class="QFormLayout" name="formLayout_2">
+       <item row="0" column="0">
+        <widget class="QLabel" name="authorLabel">
+         <property name="text">
+          <string>Имя автора</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="authorFirstName"/>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="authorLastNameLabel">
+         <property name="text">
+          <string>Фамилия автора</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="authorLastName"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QPushButton" name="addAuthorButton">
+      <property name="geometry">
+       <rect>
+        <x>394</x>
+        <y>80</y>
+        <width>111</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Добавить автора</string>
       </property>
      </widget>
     </widget>
