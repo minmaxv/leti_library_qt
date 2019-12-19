@@ -21,7 +21,8 @@ enum class Pages {
     BOOKS,
     NEW_READER,
     FIND_READER,
-    NEW_BOOK
+    NEW_BOOK,
+    FIND_BOOK
 };
 
 void MainWindow::on_readersButton_clicked() {
@@ -131,19 +132,25 @@ void MainWindow::on_FindReaderByIdButton_clicked()
             ui->deleteReaderButton->setVisible(true);
         }
         else {
-            QDialog *messageDialog = new QDialog;
-            QLabel *messageLabel = new QLabel;
-            QHBoxLayout *messageLayout = new QHBoxLayout();
-            messageDialog->setFixedSize(250, 150);
-            messageDialog->setWindowTitle("Warning");
-            messageLabel->setText("Нет читателя с таким id");
-            messageLabel->setAlignment(Qt::AlignCenter);
-            messageLayout->addWidget(messageLabel);
-            messageDialog->setLayout(messageLayout);
-            messageDialog->exec();
+            showMessageDialog("Нет читателя с таким id");
         }
     }
 }
+
+
+void MainWindow::showMessageDialog(const QString& text) {
+    QDialog *messageDialog = new QDialog;
+    QLabel *messageLabel = new QLabel;
+    QHBoxLayout *messageLayout = new QHBoxLayout();
+    messageDialog->setFixedSize(250, 150);
+    messageDialog->setWindowTitle("Warning");
+    messageLabel->setText(text);
+    messageLabel->setAlignment(Qt::AlignCenter);
+    messageLayout->addWidget(messageLabel);
+    messageDialog->setLayout(messageLayout);
+    messageDialog->exec();
+}
+
 
 void MainWindow::on_deleteReaderButton_clicked()
 {
@@ -173,5 +180,56 @@ void MainWindow::on_addBookButton_2_clicked()
 
 void MainWindow::on_cancelBookAddButton_clicked()
 {
+    on_booksButton_clicked();
+}
+
+void MainWindow::on_findBookButton_clicked()
+{
+    ui->idLineBook->clear();
+    ui->IdOfBook->clear();
+    ui->titleBook->clear();
+    ui->yearBook->clear();
+    ui->placeBook->clear();
+    ui->LBCBook->clear();
+    ui->UDCBook->clear();
+    ui->amountBook->clear();
+    ui->deleteBookButton->setVisible(false);
+    ui->stackedWidget->setCurrentIndex(static_cast<int>(Pages::FIND_BOOK));
+}
+
+void MainWindow::on_FindBookByIdButton_clicked()
+{
+    if (ui->idLineBook->text() != "") {
+        QSqlTableModel *model = new QSqlTableModel;
+        model->setTable("books");
+        model->setFilter("book_id="+ ui->idLineBook->text());
+        model->select();
+        if (model->rowCount()) {
+            QSqlRecord record = model->record(0);
+            ui->IdOfBook->setText(record.value("book_id").toString());
+            ui->titleBook->setText(record.value("title").toString());
+            ui->yearBook->setText(record.value("publication_year").toString());
+            ui->placeBook->setText(record.value("publication_place").toString());
+            ui->LBCBook->setText(record.value("LBC_number").toString());
+            ui->UDCBook->setText(record.value("UDC_number").toString());
+            ui->amountBook->setText(record.value("amount").toString());
+            ui->deleteBookButton->setVisible(true);
+        }
+        else {
+            showMessageDialog("Нет книги с таким id");
+        }
+    }
+}
+
+void MainWindow::on_backToBooksButton_clicked()
+{
+    on_booksButton_clicked();
+}
+
+void MainWindow::on_deleteBookButton_clicked()
+{
+    QMap <QString, QString> id;
+    id["book_id"] = ui->IdOfBook->text();
+    db.deleteRecord("books", id);
     on_booksButton_clicked();
 }

@@ -18,6 +18,7 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow() override;
     LibraryDataBase db;
+    void showMessageDialog(const QString& text);
 
 private slots:
     void on_readersButton_clicked();
@@ -42,6 +43,14 @@ private slots:
     void on_addBookButton_2_clicked();
 
     void on_cancelBookAddButton_clicked();
+
+    void on_findBookButton_clicked();
+
+    void on_FindBookByIdButton_clicked();
+
+    void on_backToBooksButton_clicked();
+
+    void on_deleteBookButton_clicked();
 
 private:
     Ui::MainWindow *ui;

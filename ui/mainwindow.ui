@@ -121,7 +121,7 @@
        </rect>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton">
+     <widget class="QPushButton" name="findBookButton">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -805,6 +805,32 @@
         <width>256</width>
         <height>192</height>
        </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="backToBooksButton">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>310</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Назад</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="deleteBookButton">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>310</y>
+        <width>101</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Удалить книгу</string>
       </property>
      </widget>
     </widget>
