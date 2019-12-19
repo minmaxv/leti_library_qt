@@ -145,6 +145,3 @@ void LibraryDataBase::closeDB() {
     db.close();
 }
 
-bool LibraryDataBase::get_error() const {
-    return err;
-}
