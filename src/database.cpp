@@ -119,6 +119,11 @@ void LibraryDataBase::insertRecord(const QString& table,
     if (photo!=nullptr) {
         record.setValue("photo", photo);
     }
+    if (table=="book_out") {
+        QDate date;
+        record.setValue("delivery_date", date.currentDate());
+        record.setValue("return_date", date.currentDate().addDays(14));
+    }
 
     if (model->insertRecord(-1, record)) {
         model->submitAll();
@@ -136,10 +141,11 @@ void LibraryDataBase::deleteRecord(const QString& table, const QMap<QString, QSt
 }
 
 QSqlTableModel* LibraryDataBase::get_model(const QString& table) {
-    model->setTable(table);
-    model->select();
-    model->setEditStrategy(QSqlTableModel::OnFieldChange);
-    return model;
+    QSqlTableModel *new_model = new QSqlTableModel;
+    new_model->setTable(table);
+    new_model->select();
+    new_model->setEditStrategy(QSqlTableModel::OnFieldChange);
+    return new_model;
 }
 
 void LibraryDataBase::openDB() {
@@ -154,4 +160,77 @@ void LibraryDataBase::closeDB() {
 
 bool LibraryDataBase::get_error() const {
     return err;
+}
+
+QSqlTableModel* LibraryDataBase::checkId(const QString& table, const QString& id_field, const QString& id_value)
+{
+    model->setTable(table);
+    model->setFilter(id_field + "=" + id_value);
+    model->select();
+    if (not model->rowCount()) {
+        showMessageDialog("Нет " + id_field +" с таким id");
+    }
+    return model;
+
+}
+
+void LibraryDataBase::showMessageDialog(const QString& text)
+{
+    QDialog *messageDialog = new QDialog;
+    QLabel *messageLabel = new QLabel;
+    QHBoxLayout *messageLayout = new QHBoxLayout();
+
+    messageDialog->setFixedSize(300, 150);
+    messageDialog->setWindowTitle("Warning");
+    messageLabel->setText(text);
+    messageLabel->setAlignment(Qt::AlignCenter);
+    messageLayout->addWidget(messageLabel);
+    messageDialog->setLayout(messageLayout);
+    messageDialog->exec();
+}
+
+void LibraryDataBase::updateOutBook(const QString& book_id, const QString& reader_id)
+{
+    model->setTable("book_out");
+    model->setFilter("book_id=" + book_id + " and card_id=" + reader_id);
+    model->select();
+    if (model->rowCount()) {
+        QSqlRecord record = model->record(0);
+        if (record.value("real_return_date").toDate().isNull()) {
+            QDate date;
+            record.setValue("real_return_date", date.currentDate());
+            model->setRecord(0, record);
+            model->submitAll();
+        }
+        else {
+            showMessageDialog("Данная книга уже возвращена данным читателем");
+        }
+    }
+    else {
+        showMessageDialog("Данная книга не была выдана данному читателю");
+    }
+}
+
+qint64 LibraryDataBase::countFine(const QString &reader_id)
+{
+    qint64 fine(0), days;
+    QDate date;
+    model->setTable("book_out");
+    model->setFilter("card_id=" + reader_id);
+    model->select();
+    for (int i = 0; i < model->rowCount(); ++i) {
+        QSqlRecord record = model->record(i);
+        QDate realDate = record.value("real_return_date").toDate();
+        QDate returnDate = record.value("return_date").toDate();
+        if (not realDate.isValid()) {
+            days = returnDate.daysTo(date.currentDate());
+            }
+        else {
+            days = returnDate.daysTo(realDate);
+            }
+        if (days > 0) {
+            fine += days*10;
+        }
+        }
+    return fine;
 }
