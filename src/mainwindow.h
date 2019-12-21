@@ -21,6 +21,8 @@ LibraryDataBase db;
 void showMessageDialog(const QString& text);
 QSqlTableModel *filterAuthors(const QString& firstName, const QString& lastName);
 void insertIntoAuthorBooks(QSqlTableModel *model);
+QList <QString> getAuthorsByBookId(const QString book_id);
+void setList();
 
 private slots:
 void on_readersButton_clicked();

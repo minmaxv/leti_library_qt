@@ -237,7 +237,8 @@ void MainWindow::on_FindBookByIdButton_clicked()
             ui->UDCBook->setText(record.value("UDC_number").toString());
             ui->amountBook->setText(record.value("amount").toString());
             ui->authorsView->setVisible(true);
-            ui->authorsView->setModel();
+            setList();
+            ui->authorsView->show();
             ui->deleteBookButton->setVisible(true);
             ui->authorLabel->setVisible(true);
             ui->authorFirstName->setVisible(true);
@@ -249,6 +250,30 @@ void MainWindow::on_FindBookByIdButton_clicked()
             showMessageDialog("Нет книги с таким id");
         }
     }
+}
+
+
+void MainWindow::setList()
+{
+    QList <QString> authors = getAuthorsByBookId(ui->IdOfBook->text());
+    QStringListModel *listModel = new QStringListModel;
+    listModel->setStringList(authors);
+    ui->authorsView->setModel(listModel);
+}
+
+QList <QString> MainWindow::getAuthorsByBookId(const QString book_id)
+{
+    QString text = "Select first_name, last_name "
+           "From authors "
+           "Where author_id in (Select author_id "
+           "From book_author "
+           "Where book_id =" +  book_id + ");";
+    QSqlQuery query(text);
+    QList <QString> authors;
+    while (query.next()) {
+           authors.append(query.value("first_name").toString() + " " + query.value("last_name").toString());
+       }
+    return authors;
 }
 
 void MainWindow::on_backToBooksButton_clicked()
@@ -270,7 +295,9 @@ QSqlTableModel *MainWindow::filterAuthors(const QString& firstName, const QStrin
     QSqlTableModel *model = new QSqlTableModel;
 
     model->setTable("authors");
-    model->setFilter("first_name=" + firstName + " and last_name=" + lastName);
+    QString q = ("first_name='" + firstName + "' and last_name='" + lastName + "'");
+    model->setFilter(q);
+    model->select();
     return model;
 }
 
@@ -294,6 +321,7 @@ void MainWindow::on_addAuthorButton_clicked()
         QSqlTableModel *model = filterAuthors(firstName, lastName);
         if (model->rowCount()) {
             insertIntoAuthorBooks(model);
+            setList();
         } else {
             QMap <QString, QString> newAuthor;
             newAuthor["first_name"] = firstName;
@@ -301,6 +329,7 @@ void MainWindow::on_addAuthorButton_clicked()
             db.insertRecord("authors", newAuthor);
             QSqlTableModel *model = filterAuthors(firstName, lastName);
             insertIntoAuthorBooks(model);
+            setList();
         }
     }
 }

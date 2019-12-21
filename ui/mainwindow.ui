@@ -797,16 +797,6 @@
        <string>Найти</string>
       </property>
      </widget>
-     <widget class="QTableView" name="authorsView">
-      <property name="geometry">
-       <rect>
-        <x>280</x>
-        <y>120</y>
-        <width>256</width>
-        <height>192</height>
-       </rect>
-      </property>
-     </widget>
      <widget class="QPushButton" name="backToBooksButton">
       <property name="geometry">
        <rect>
@@ -876,6 +866,16 @@
       </property>
       <property name="text">
        <string>Добавить автора</string>
+      </property>
+     </widget>
+     <widget class="QListView" name="authorsView">
+      <property name="geometry">
+       <rect>
+        <x>280</x>
+        <y>120</y>
+        <width>256</width>
+        <height>192</height>
+       </rect>
       </property>
      </widget>
     </widget>
