@@ -27,7 +27,7 @@
      <enum>QFrame::StyledPanel</enum>
     </property>
     <property name="currentIndex">
-     <number>6</number>
+     <number>7</number>
     </property>
     <widget class="QWidget" name="MainPage">
      <widget class="QPushButton" name="readersButton">
@@ -132,6 +132,32 @@
       </property>
       <property name="text">
        <string>Найти книгу</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="bookOutButton">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>160</y>
+        <width>131</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Выдать книгу</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>230</y>
+        <width>131</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Сдать книгу</string>
       </property>
      </widget>
     </widget>
@@ -877,6 +903,60 @@
         <height>192</height>
        </rect>
       </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="bookOutPage">
+     <widget class="QPushButton" name="backToBookButtoN">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>290</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Назад</string>
+      </property>
+     </widget>
+     <widget class="QWidget" name="formLayoutWidget_3">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>30</y>
+        <width>160</width>
+        <height>80</height>
+       </rect>
+      </property>
+      <layout class="QFormLayout" name="formLayout_3">
+       <item row="0" column="0">
+        <widget class="QLabel" name="idOutBook">
+         <property name="text">
+          <string>id книги</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="idOutBookEdit"/>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="idOutReader">
+         <property name="text">
+          <string>id читателя</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="idOutReadereEdit"/>
+       </item>
+       <item row="2" column="0">
+        <widget class="QPushButton" name="outBookButton">
+         <property name="text">
+          <string>Выдать</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </widget>
    </widget>

@@ -119,6 +119,11 @@ void LibraryDataBase::insertRecord(const QString& table,
     if (photo!=nullptr) {
         record.setValue("photo", photo);
     }
+    if (table=="book_out") {
+        QDate date;
+        record.setValue("delivery_date", date.currentDate());
+        record.setValue("return_date", date.currentDate().addDays(14));
+    }
 
     if (model->insertRecord(-1, record)) {
         model->submitAll();
@@ -154,4 +159,31 @@ void LibraryDataBase::closeDB() {
 
 bool LibraryDataBase::get_error() const {
     return err;
+}
+
+QSqlTableModel* LibraryDataBase::checkId(const QString& table, const QString& id_field, const QString& id_value)
+{
+    model->setTable(table);
+    model->setFilter(id_field + "=" + id_value);
+    model->select();
+    if (not model->rowCount()) {
+        showMessageDialog("Нет " + id_field +" с таким id");
+    }
+    return model;
+
+}
+
+void LibraryDataBase::showMessageDialog(const QString &text)
+{
+    QDialog *messageDialog = new QDialog;
+    QLabel *messageLabel = new QLabel;
+    QHBoxLayout *messageLayout = new QHBoxLayout();
+
+    messageDialog->setFixedSize(250, 150);
+    messageDialog->setWindowTitle("Warning");
+    messageLabel->setText(text);
+    messageLabel->setAlignment(Qt::AlignCenter);
+    messageLayout->addWidget(messageLabel);
+    messageDialog->setLayout(messageLayout);
+    messageDialog->exec();
 }

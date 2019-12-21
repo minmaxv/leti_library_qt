@@ -2,6 +2,9 @@
 
 #include <QtSql>
 #include <QTableView>
+#include <QDialog>
+#include <QHBoxLayout>
+#include <QLabel>
 
 class LibraryDataBase {
 
@@ -18,6 +21,8 @@ public:
     void openDB();
     void closeDB();
     bool get_error() const;
+    QSqlTableModel* checkId(const QString& table, const QString& id_field, const QString& id_value);
+    void showMessageDialog(const QString &text);
 
 private:
     bool err;
