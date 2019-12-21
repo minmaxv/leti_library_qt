@@ -24,9 +24,8 @@ TODO
 
 - [x] Delete readers
 - [x] Search readers
-- [ ] Search autors
-- [ ] Search books
-- [ ] Add book
-- [ ] Delete book
-- [ ] Add autor
+- [x] Search books
+- [x] Add book
+- [x] Delete book
+- [x] Add autor
 - [ ] Delete autor
