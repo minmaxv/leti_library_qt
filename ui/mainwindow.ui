@@ -27,7 +27,7 @@
      <enum>QFrame::StyledPanel</enum>
     </property>
     <property name="currentIndex">
-     <number>7</number>
+     <number>4</number>
     </property>
     <widget class="QWidget" name="MainPage">
      <widget class="QPushButton" name="readersButton">
@@ -147,7 +147,7 @@
        <string>Выдать книгу</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton">
+     <widget class="QPushButton" name="bookInButton">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -364,7 +364,7 @@
         <x>20</x>
         <y>80</y>
         <width>251</width>
-        <height>151</height>
+        <height>164</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -489,6 +489,24 @@
           <widget class="QLabel" name="addressOfReader">
            <property name="text">
             <string>adr</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_24">
+         <item>
+          <widget class="QLabel" name="label_20">
+           <property name="text">
+            <string>Штраф</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="fineLabel">
+           <property name="text">
+            <string>fine</string>
            </property>
           </widget>
          </item>
@@ -957,6 +975,80 @@
         </widget>
        </item>
       </layout>
+     </widget>
+     <widget class="QTableView" name="tableOutView">
+      <property name="geometry">
+       <rect>
+        <x>140</x>
+        <y>110</y>
+        <width>256</width>
+        <height>192</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="page">
+     <widget class="QWidget" name="formLayoutWidget_4">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>30</y>
+        <width>160</width>
+        <height>80</height>
+       </rect>
+      </property>
+      <layout class="QFormLayout" name="formLayout_4">
+       <item row="0" column="0">
+        <widget class="QLabel" name="idOutBook_2">
+         <property name="text">
+          <string>id книги</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="idInBookEdit"/>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="idOutReader_2">
+         <property name="text">
+          <string>id читателя</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="idInReaderEdit"/>
+       </item>
+       <item row="2" column="0">
+        <widget class="QPushButton" name="inBookButton">
+         <property name="text">
+          <string>Сдать</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QPushButton" name="backToBookButtoN_2">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>290</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Назад</string>
+      </property>
+     </widget>
+     <widget class="QTableView" name="tableInView">
+      <property name="geometry">
+       <rect>
+        <x>140</x>
+        <y>110</y>
+        <width>256</width>
+        <height>192</height>
+       </rect>
+      </property>
      </widget>
     </widget>
    </widget>

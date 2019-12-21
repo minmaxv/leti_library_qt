@@ -23,6 +23,8 @@ public:
     bool get_error() const;
     QSqlTableModel* checkId(const QString& table, const QString& id_field, const QString& id_value);
     void showMessageDialog(const QString &text);
+    void updateOutBook(const QString& book_id, const QString& reader_id);
+    qint64 countFine(const QString& reader_id);
 
 private:
     bool err;

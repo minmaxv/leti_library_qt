@@ -63,6 +63,12 @@ void on_backToBookButtoN_clicked();
 
 void on_outBookButton_clicked();
 
+void on_bookInButton_clicked();
+
+void on_backToBookButtoN_2_clicked();
+
+void on_inBookButton_clicked();
+
 private:
 Ui::MainWindow *ui;
 };

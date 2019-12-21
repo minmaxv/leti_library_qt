@@ -25,7 +25,8 @@ enum class Pages {
     FIND_READER,
     NEW_BOOK,
     FIND_BOOK,
-    OUT_BOOK
+    OUT_BOOK,
+    IN_BOOK
 };
 
 void MainWindow::on_readersButton_clicked()
@@ -112,6 +113,7 @@ void MainWindow::on_findReaderButton_clicked()
     ui->phoneNumberOfReader->clear();
     ui->passportInfoOfReader->clear();
     ui->addressOfReader->clear();
+    ui->fineLabel->clear();
     ui->photoOfReader->setScene(nullptr);
     ui->photoOfReader->setVisible(false);
     ui->deleteReaderButton->setVisible(false);
@@ -135,6 +137,7 @@ void MainWindow::on_FindReaderByIdButton_clicked()
             ui->passportInfoOfReader->setText(record.value(
                                   "passport_info").toString());
             ui->addressOfReader->setText(record.value("address").toString());
+            ui->fineLabel->setText(QString::number(db.countFine(reader_id)));
 
             QImage image = QImage::fromData(record.value("photo").toByteArray(),
                             "jpg");
@@ -149,8 +152,6 @@ void MainWindow::on_FindReaderByIdButton_clicked()
         }
     }
 }
-
-
 
 void MainWindow::on_deleteReaderButton_clicked()
 {
@@ -320,6 +321,10 @@ void MainWindow::on_addAuthorButton_clicked()
 
 void MainWindow::on_bookOutButton_clicked()
 {
+    ui->idOutBookEdit->clear();
+    ui->idOutReadereEdit->clear();
+    ui->tableOutView->setModel(db.get_model("book_out"));
+    ui->tableOutView->show();
     ui->stackedWidget->setCurrentIndex(static_cast<int>(Pages::OUT_BOOK));
 }
 
@@ -332,7 +337,6 @@ void MainWindow::on_outBookButton_clicked()
 {
     QString book_id = ui->idOutBookEdit->text();
     QString reader_id = ui->idOutReadereEdit->text();
-
     if (book_id != "" and reader_id != "") {
         QSqlTableModel *bookModel = db.checkId("books", "book_id", book_id);
         QSqlTableModel *readerModel = db.checkId("library_cards", "card_id", reader_id);
@@ -341,6 +345,35 @@ void MainWindow::on_outBookButton_clicked()
             outBook["book_id"] = book_id;
             outBook["card_id"] = reader_id;
             db.insertRecord("book_out", outBook);
+            ui->tableOutView->setModel(db.get_model("book_out"));
+        }
+    }
+}
+
+void MainWindow::on_bookInButton_clicked()
+{
+    ui->idInBookEdit->clear();
+    ui->idInReaderEdit->clear();
+    ui->tableInView->setModel(db.get_model("book_out"));
+    ui->tableInView->show();
+    ui->stackedWidget->setCurrentIndex(static_cast<int>(Pages::IN_BOOK));
+}
+
+void MainWindow::on_backToBookButtoN_2_clicked()
+{
+    on_booksButton_clicked();
+}
+
+void MainWindow::on_inBookButton_clicked()
+{
+    QString book_id = ui->idInBookEdit->text();
+    QString reader_id = ui->idInReaderEdit->text();
+    if (book_id != "" and reader_id != "") {
+        QSqlTableModel *bookModel = db.checkId("books", "book_id", book_id);
+        QSqlTableModel *readerModel = db.checkId("library_cards", "card_id", reader_id);
+        if (bookModel->rowCount() and readerModel->rowCount()) {
+            db.updateOutBook(book_id, reader_id);
+            ui->tableInView->setModel(db.get_model("book_out"));
         }
     }
 }
