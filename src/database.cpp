@@ -109,7 +109,7 @@ void LibraryDataBase::showTable(const QString& table) {
 
 void LibraryDataBase::insertRecord(const QString& table,
                                    const QMap<QString, QString>& records_to_set,
-                                   const QByteArray photo = nullptr) {
+                                   const QByteArray photo) {
     model->setTable(table);
 
     QSqlRecord record = model->record();
