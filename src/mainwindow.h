@@ -18,7 +18,6 @@ public:
 explicit MainWindow(QWidget *parent = nullptr);
 ~MainWindow() override;
 LibraryDataBase db;
-void showMessageDialog(const QString& text);
 QSqlTableModel *filterAuthors(const QString& firstName, const QString& lastName);
 void insertIntoAuthorBooks(QSqlTableModel *model);
 QList <QString> getAuthorsByBookId(const QString book_id);
@@ -57,6 +56,18 @@ void on_backToBooksButton_clicked();
 void on_deleteBookButton_clicked();
 
 void on_addAuthorButton_clicked();
+
+void on_bookOutButton_clicked();
+
+void on_backToBookButtoN_clicked();
+
+void on_outBookButton_clicked();
+
+void on_bookInButton_clicked();
+
+void on_backToBookButtoN_2_clicked();
+
+void on_inBookButton_clicked();
 
 private:
 Ui::MainWindow *ui;

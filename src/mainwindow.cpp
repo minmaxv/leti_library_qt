@@ -18,7 +18,15 @@ MainWindow::~MainWindow()
 }
 
 enum class Pages {
-    MAIN = 0, READERS, BOOKS, NEW_READER, FIND_READER, NEW_BOOK, FIND_BOOK
+    MAIN = 0,
+    READERS,
+    BOOKS,
+    NEW_READER,
+    FIND_READER,
+    NEW_BOOK,
+    FIND_BOOK,
+    OUT_BOOK,
+    IN_BOOK
 };
 
 void MainWindow::on_readersButton_clicked()
@@ -105,6 +113,7 @@ void MainWindow::on_findReaderButton_clicked()
     ui->phoneNumberOfReader->clear();
     ui->passportInfoOfReader->clear();
     ui->addressOfReader->clear();
+    ui->fineLabel->clear();
     ui->photoOfReader->setScene(nullptr);
     ui->photoOfReader->setVisible(false);
     ui->deleteReaderButton->setVisible(false);
@@ -113,15 +122,11 @@ void MainWindow::on_findReaderButton_clicked()
 
 void MainWindow::on_FindReaderByIdButton_clicked()
 {
-    if (ui->idLineEdit->text() != "") {
-        QSqlTableModel *model = new QSqlTableModel;
-
-        model->setTable("library_cards");
-        model->setFilter("card_id=" + ui->idLineEdit->text());
-        model->select();
+    QString reader_id = ui->idLineEdit->text();
+    if (reader_id != "") {
+        QSqlTableModel *model = db.checkId("library_cards", "card_id", reader_id);
         if (model->rowCount()) {
             QSqlRecord record = model->record(0);
-
             ui->readerCard_Id->setText(record.value("card_id").toString());
             ui->firstNameOfReader->setText(record.value(
                                    "first_name").toString());
@@ -132,6 +137,7 @@ void MainWindow::on_FindReaderByIdButton_clicked()
             ui->passportInfoOfReader->setText(record.value(
                                   "passport_info").toString());
             ui->addressOfReader->setText(record.value("address").toString());
+            ui->fineLabel->setText(QString::number(db.countFine(reader_id)));
 
             QImage image = QImage::fromData(record.value("photo").toByteArray(),
                             "jpg");
@@ -143,25 +149,8 @@ void MainWindow::on_FindReaderByIdButton_clicked()
             ui->photoOfReader->fitInView(scene->sceneRect(),
                              Qt::KeepAspectRatio);
             ui->deleteReaderButton->setVisible(true);
-        } else {
-            showMessageDialog("Нет читателя с таким id");
         }
     }
-}
-
-void MainWindow::showMessageDialog(const QString &text)
-{
-    QDialog *messageDialog = new QDialog;
-    QLabel *messageLabel = new QLabel;
-    QHBoxLayout *messageLayout = new QHBoxLayout();
-
-    messageDialog->setFixedSize(250, 150);
-    messageDialog->setWindowTitle("Warning");
-    messageLabel->setText(text);
-    messageLabel->setAlignment(Qt::AlignCenter);
-    messageLayout->addWidget(messageLabel);
-    messageDialog->setLayout(messageLayout);
-    messageDialog->exec();
 }
 
 void MainWindow::on_deleteReaderButton_clicked()
@@ -207,6 +196,8 @@ void MainWindow::on_findBookButton_clicked()
     ui->LBCBook->clear();
     ui->UDCBook->clear();
     ui->amountBook->clear();
+    ui->authorFirstName->clear();
+    ui->authorLastName->clear();
     ui->authorLabel->setVisible(false);
     ui->authorLastNameLabel->setVisible(false);
     ui->authorFirstName->setVisible(false);
@@ -219,15 +210,11 @@ void MainWindow::on_findBookButton_clicked()
 
 void MainWindow::on_FindBookByIdButton_clicked()
 {
-    if (ui->idLineBook->text() != "") {
-        QSqlTableModel *model = new QSqlTableModel;
-
-        model->setTable("books");
-        model->setFilter("book_id=" + ui->idLineBook->text());
-        model->select();
+    QString book_id = ui->idLineBook->text();
+    if (book_id != "") {
+        QSqlTableModel *model = db.checkId("books", "book_id", book_id);
         if (model->rowCount()) {
             QSqlRecord record = model->record(0);
-
             ui->IdOfBook->setText(record.value("book_id").toString());
             ui->titleBook->setText(record.value("title").toString());
             ui->yearBook->setText(record.value("publication_year").toString());
@@ -246,8 +233,6 @@ void MainWindow::on_FindBookByIdButton_clicked()
             ui->authorLastNameLabel->setVisible(true);
             ui->deleteBookButton->setVisible(true);
             ui->addAuthorButton->setVisible(true);
-        } else {
-            showMessageDialog("Нет книги с таким id");
         }
     }
 }
@@ -330,6 +315,65 @@ void MainWindow::on_addAuthorButton_clicked()
             QSqlTableModel *model = filterAuthors(firstName, lastName);
             insertIntoAuthorBooks(model);
             setList();
+        }
+    }
+}
+
+void MainWindow::on_bookOutButton_clicked()
+{
+    ui->idOutBookEdit->clear();
+    ui->idOutReadereEdit->clear();
+    ui->tableOutView->setModel(db.get_model("book_out"));
+    ui->tableOutView->show();
+    ui->stackedWidget->setCurrentIndex(static_cast<int>(Pages::OUT_BOOK));
+}
+
+void MainWindow::on_backToBookButtoN_clicked()
+{
+    on_booksButton_clicked();
+}
+
+void MainWindow::on_outBookButton_clicked()
+{
+    QString book_id = ui->idOutBookEdit->text();
+    QString reader_id = ui->idOutReadereEdit->text();
+    if (book_id != "" and reader_id != "") {
+        QSqlTableModel *bookModel = db.checkId("books", "book_id", book_id);
+        QSqlTableModel *readerModel = db.checkId("library_cards", "card_id", reader_id);
+        if (bookModel->rowCount() and readerModel->rowCount()) {
+            QMap <QString, QString> outBook;
+            outBook["book_id"] = book_id;
+            outBook["card_id"] = reader_id;
+            db.insertRecord("book_out", outBook);
+            ui->tableOutView->setModel(db.get_model("book_out"));
+        }
+    }
+}
+
+void MainWindow::on_bookInButton_clicked()
+{
+    ui->idInBookEdit->clear();
+    ui->idInReaderEdit->clear();
+    ui->tableInView->setModel(db.get_model("book_out"));
+    ui->tableInView->show();
+    ui->stackedWidget->setCurrentIndex(static_cast<int>(Pages::IN_BOOK));
+}
+
+void MainWindow::on_backToBookButtoN_2_clicked()
+{
+    on_booksButton_clicked();
+}
+
+void MainWindow::on_inBookButton_clicked()
+{
+    QString book_id = ui->idInBookEdit->text();
+    QString reader_id = ui->idInReaderEdit->text();
+    if (book_id != "" and reader_id != "") {
+        QSqlTableModel *bookModel = db.checkId("books", "book_id", book_id);
+        QSqlTableModel *readerModel = db.checkId("library_cards", "card_id", reader_id);
+        if (bookModel->rowCount() and readerModel->rowCount()) {
+            db.updateOutBook(book_id, reader_id);
+            ui->tableInView->setModel(db.get_model("book_out"));
         }
     }
 }
