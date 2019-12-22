@@ -97,7 +97,7 @@
      </widget>
     </widget>
     <widget class="QWidget" name="BooksPage">
-     <widget class="QPushButton" name="pushButton">
+     <widget class="QPushButton" name="addBookButton_2">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -121,6 +121,45 @@
        </rect>
       </property>
      </widget>
+     <widget class="QPushButton" name="findBookButton">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>90</y>
+        <width>131</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Найти книгу</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="bookOutButton">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>160</y>
+        <width>131</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Выдать книгу</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="bookInButton">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>230</y>
+        <width>131</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Сдать книгу</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="AddReaderPage">
      <widget class="QWidget" name="layoutWidget">
@@ -137,7 +176,7 @@
         <layout class="QVBoxLayout" name="verticalLayout">
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_6">
-           <item>
+           <item alignment="Qt::AlignLeft">
             <widget class="QLabel" name="label_5">
              <property name="text">
               <string>Тип билета</string>
@@ -145,7 +184,37 @@
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="card_type"/>
+            <widget class="QComboBox" name="card_type">
+             <item>
+              <property name="text">
+               <string>Постоянный</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Разовый</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Временный</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_10">
+           <item>
+            <widget class="QLabel" name="label_7">
+             <property name="text">
+              <string>Имя</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="first_name"/>
            </item>
           </layout>
          </item>
@@ -174,20 +243,6 @@
            </item>
            <item>
             <widget class="QLineEdit" name="address"/>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_3">
-           <item>
-            <widget class="QLabel" name="label_2">
-             <property name="text">
-              <string>Имя</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLineEdit" name="first_name"/>
            </item>
           </layout>
          </item>
@@ -277,77 +332,6 @@
        <string>Назад</string>
       </property>
      </widget>
-     <widget class="QWidget" name="formLayoutWidget">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>30</y>
-        <width>301</width>
-        <height>251</height>
-       </rect>
-      </property>
-      <layout class="QFormLayout" name="formLayout">
-       <item row="0" column="1">
-        <widget class="QLineEdit" name="idLineEdit"/>
-       </item>
-       <item row="0" column="0">
-        <widget class="QLabel" name="idLabel">
-         <property name="text">
-          <string>Id читателя</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="1">
-        <widget class="QPushButton" name="FindReaderByIdButton">
-         <property name="text">
-          <string>Найти</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0">
-        <widget class="QLabel" name="firstNameOfReader">
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="0">
-        <widget class="QLabel" name="lastNameOfReader">
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="0">
-        <widget class="QLabel" name="passportInfoOfReader">
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="0">
-        <widget class="QLabel" name="cardTypeOfReader">
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
-       </item>
-       <item row="6" column="0">
-        <widget class="QLabel" name="phoneNumberOfReader">
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
-       </item>
-       <item row="7" column="0">
-        <widget class="QLabel" name="addressOfReader">
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
      <widget class="QGraphicsView" name="photoOfReader">
       <property name="enabled">
        <bool>true</bool>
@@ -357,6 +341,711 @@
         <x>330</x>
         <y>70</y>
         <width>221</width>
+        <height>192</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="deleteReaderButton">
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>290</y>
+        <width>111</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Удалить читателя</string>
+      </property>
+     </widget>
+     <widget class="QWidget" name="verticalLayoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>80</y>
+        <width>251</width>
+        <height>164</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_16">
+         <item>
+          <widget class="QLabel" name="label_13">
+           <property name="text">
+            <string>Id:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="readerCard_Id">
+           <property name="text">
+            <string>id</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <item>
+          <widget class="QLabel" name="label_2">
+           <property name="text">
+            <string>Имя:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="firstNameOfReader">
+           <property name="text">
+            <string>f</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_11">
+         <item>
+          <widget class="QLabel" name="label_8">
+           <property name="text">
+            <string>Фамилия:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="lastNameOfReader">
+           <property name="text">
+            <string>l</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_12">
+         <item>
+          <widget class="QLabel" name="label_9">
+           <property name="text">
+            <string>Тип билета:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="cardTypeOfReader">
+           <property name="text">
+            <string>c</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_13">
+         <item>
+          <widget class="QLabel" name="label_10">
+           <property name="text">
+            <string>Паспорт:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="passportInfoOfReader">
+           <property name="text">
+            <string>pass</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_14">
+         <item>
+          <widget class="QLabel" name="label_11">
+           <property name="text">
+            <string>Номер телефона:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="phoneNumberOfReader">
+           <property name="text">
+            <string>ph</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_15">
+         <item>
+          <widget class="QLabel" name="label_12">
+           <property name="text">
+            <string>Адрес:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="addressOfReader">
+           <property name="text">
+            <string>adr</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_24">
+         <item>
+          <widget class="QLabel" name="label_20">
+           <property name="text">
+            <string>Штраф</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="fineLabel">
+           <property name="text">
+            <string>fine</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QLineEdit" name="idLineEdit">
+      <property name="geometry">
+       <rect>
+        <x>88</x>
+        <y>31</y>
+        <width>133</width>
+        <height>20</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="idLabel">
+      <property name="geometry">
+       <rect>
+        <x>21</x>
+        <y>31</y>
+        <width>61</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Id читателя</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="FindReaderByIdButton">
+      <property name="geometry">
+       <rect>
+        <x>88</x>
+        <y>57</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Найти</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="addBookPage">
+     <widget class="QWidget" name="layoutWidget_3">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>20</y>
+        <width>491</width>
+        <height>301</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_4">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_17">
+         <item alignment="Qt::AlignLeft">
+          <widget class="QLabel" name="label_14">
+           <property name="text">
+            <string>Название</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="bookTitle"/>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_18">
+         <item>
+          <widget class="QLabel" name="label_15">
+           <property name="text">
+            <string>Год издания</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="bookYear"/>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_19">
+         <item>
+          <widget class="QLabel" name="label_16">
+           <property name="text">
+            <string>Место издания</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="bookPlace"/>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_20">
+         <item>
+          <widget class="QLabel" name="label_17">
+           <property name="text">
+            <string>Шифр ББК</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="bookLBC"/>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_21">
+         <item>
+          <widget class="QLabel" name="label_18">
+           <property name="text">
+            <string>Шифр УДК</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="bookUDC"/>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_22">
+         <item>
+          <widget class="QLabel" name="label_19">
+           <property name="text">
+            <string>Кол-во экземпляров</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="bookAmount"/>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_23">
+         <item>
+          <widget class="QPushButton" name="addBookToDBButton">
+           <property name="text">
+            <string>Внести в базу</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="cancelBookAddButton">
+           <property name="text">
+            <string>Отмена</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="findBookPage">
+     <widget class="QWidget" name="verticalLayoutWidget_3">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>110</y>
+        <width>251</width>
+        <height>151</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_9">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_47">
+         <item>
+          <widget class="QLabel" name="label_39">
+           <property name="text">
+            <string>Id:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="IdOfBook">
+           <property name="text">
+            <string>id</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_48">
+         <item>
+          <widget class="QLabel" name="label_40">
+           <property name="text">
+            <string>Название:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="titleBook">
+           <property name="text">
+            <string>title</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_49">
+         <item>
+          <widget class="QLabel" name="label_41">
+           <property name="text">
+            <string>Год издания:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="yearBook">
+           <property name="text">
+            <string>year</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_50">
+         <item>
+          <widget class="QLabel" name="label_42">
+           <property name="text">
+            <string>Место издания</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="placeBook">
+           <property name="text">
+            <string>place</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_51">
+         <item>
+          <widget class="QLabel" name="label_43">
+           <property name="text">
+            <string>Шифр ББК:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="LBCBook">
+           <property name="text">
+            <string>LBC</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_52">
+         <item>
+          <widget class="QLabel" name="label_44">
+           <property name="text">
+            <string>Шифр УДК:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="UDCBook">
+           <property name="text">
+            <string>UDC</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_53">
+         <item>
+          <widget class="QLabel" name="label_45">
+           <property name="text">
+            <string>Кол-во экземпляров:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="amountBook">
+           <property name="text">
+            <string>amount</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="formLayoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>20</y>
+        <width>160</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <layout class="QFormLayout" name="formLayout">
+       <item row="0" column="0">
+        <widget class="QLabel" name="idLabelBook">
+         <property name="text">
+          <string>Id</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="idLineBook"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QPushButton" name="FindBookByIdButton">
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>50</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Найти</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="backToBooksButton">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>310</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Назад</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="deleteBookButton">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>310</y>
+        <width>101</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Удалить книгу</string>
+      </property>
+     </widget>
+     <widget class="QWidget" name="formLayoutWidget_2">
+      <property name="geometry">
+       <rect>
+        <x>280</x>
+        <y>20</y>
+        <width>231</width>
+        <height>48</height>
+       </rect>
+      </property>
+      <layout class="QFormLayout" name="formLayout_2">
+       <item row="0" column="0">
+        <widget class="QLabel" name="authorLabel">
+         <property name="text">
+          <string>Имя автора</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="authorFirstName"/>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="authorLastNameLabel">
+         <property name="text">
+          <string>Фамилия автора</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="authorLastName"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QPushButton" name="addAuthorButton">
+      <property name="geometry">
+       <rect>
+        <x>394</x>
+        <y>80</y>
+        <width>111</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Добавить автора</string>
+      </property>
+     </widget>
+     <widget class="QListView" name="authorsView">
+      <property name="geometry">
+       <rect>
+        <x>280</x>
+        <y>120</y>
+        <width>256</width>
+        <height>192</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="bookOutPage">
+     <widget class="QPushButton" name="backToBookButtoN">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>290</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Назад</string>
+      </property>
+     </widget>
+     <widget class="QWidget" name="formLayoutWidget_3">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>30</y>
+        <width>160</width>
+        <height>80</height>
+       </rect>
+      </property>
+      <layout class="QFormLayout" name="formLayout_3">
+       <item row="0" column="0">
+        <widget class="QLabel" name="idOutBook">
+         <property name="text">
+          <string>id книги</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="idOutBookEdit"/>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="idOutReader">
+         <property name="text">
+          <string>id читателя</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="idOutReadereEdit"/>
+       </item>
+       <item row="2" column="0">
+        <widget class="QPushButton" name="outBookButton">
+         <property name="text">
+          <string>Выдать</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QTableView" name="tableOutView">
+      <property name="geometry">
+       <rect>
+        <x>140</x>
+        <y>110</y>
+        <width>256</width>
+        <height>192</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="page">
+     <widget class="QWidget" name="formLayoutWidget_4">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>30</y>
+        <width>160</width>
+        <height>80</height>
+       </rect>
+      </property>
+      <layout class="QFormLayout" name="formLayout_4">
+       <item row="0" column="0">
+        <widget class="QLabel" name="idOutBook_2">
+         <property name="text">
+          <string>id книги</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="idInBookEdit"/>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="idOutReader_2">
+         <property name="text">
+          <string>id читателя</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="idInReaderEdit"/>
+       </item>
+       <item row="2" column="0">
+        <widget class="QPushButton" name="inBookButton">
+         <property name="text">
+          <string>Сдать</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QPushButton" name="backToBookButtoN_2">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>290</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Назад</string>
+      </property>
+     </widget>
+     <widget class="QTableView" name="tableInView">
+      <property name="geometry">
+       <rect>
+        <x>140</x>
+        <y>110</y>
+        <width>256</width>
         <height>192</height>
        </rect>
       </property>
