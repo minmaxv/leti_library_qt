@@ -19,7 +19,7 @@
      <rect>
       <x>10</x>
       <y>0</y>
-      <width>561</width>
+      <width>591</width>
       <height>351</height>
      </rect>
     </property>
@@ -27,16 +27,16 @@
      <enum>QFrame::StyledPanel</enum>
     </property>
     <property name="currentIndex">
-     <number>4</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="MainPage">
      <widget class="QPushButton" name="readersButton">
       <property name="geometry">
        <rect>
-        <x>100</x>
-        <y>130</y>
-        <width>121</width>
-        <height>41</height>
+        <x>70</x>
+        <y>100</y>
+        <width>181</width>
+        <height>111</height>
        </rect>
       </property>
       <property name="text">
@@ -46,10 +46,10 @@
      <widget class="QPushButton" name="booksButton">
       <property name="geometry">
        <rect>
-        <x>320</x>
-        <y>130</y>
-        <width>121</width>
-        <height>41</height>
+        <x>330</x>
+        <y>100</y>
+        <width>181</width>
+        <height>111</height>
        </rect>
       </property>
       <property name="text">
@@ -72,8 +72,8 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>30</y>
-        <width>101</width>
+        <y>10</y>
+        <width>111</width>
         <height>61</height>
        </rect>
       </property>
@@ -86,13 +86,14 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>100</y>
-        <width>101</width>
+        <y>80</y>
+        <width>111</width>
         <height>61</height>
        </rect>
       </property>
       <property name="text">
-       <string>Найти читателя</string>
+       <string>Найти
+ читателя</string>
       </property>
      </widget>
     </widget>
@@ -101,9 +102,9 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>20</y>
-        <width>131</width>
-        <height>51</height>
+        <y>10</y>
+        <width>111</width>
+        <height>61</height>
        </rect>
       </property>
       <property name="text">
@@ -114,10 +115,10 @@
      <widget class="QTableView" name="booksView">
       <property name="geometry">
        <rect>
-        <x>160</x>
-        <y>20</y>
-        <width>381</width>
-        <height>311</height>
+        <x>130</x>
+        <y>10</y>
+        <width>421</width>
+        <height>331</height>
        </rect>
       </property>
      </widget>
@@ -125,9 +126,9 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>90</y>
-        <width>131</width>
-        <height>51</height>
+        <y>80</y>
+        <width>111</width>
+        <height>61</height>
        </rect>
       </property>
       <property name="text">
@@ -138,22 +139,23 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>160</y>
-        <width>131</width>
-        <height>51</height>
+        <y>150</y>
+        <width>111</width>
+        <height>61</height>
        </rect>
       </property>
       <property name="text">
-       <string>Выдать книгу</string>
+       <string>Выдать
+ книгу</string>
       </property>
      </widget>
      <widget class="QPushButton" name="bookInButton">
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>230</y>
-        <width>131</width>
-        <height>51</height>
+        <y>220</y>
+        <width>111</width>
+        <height>61</height>
        </rect>
       </property>
       <property name="text">
@@ -338,10 +340,10 @@
       </property>
       <property name="geometry">
        <rect>
-        <x>330</x>
-        <y>70</y>
-        <width>221</width>
-        <height>192</height>
+        <x>300</x>
+        <y>80</y>
+        <width>251</width>
+        <height>231</height>
        </rect>
       </property>
      </widget>
@@ -350,7 +352,7 @@
        <rect>
         <x>110</x>
         <y>290</y>
-        <width>111</width>
+        <width>161</width>
         <height>23</height>
        </rect>
       </property>
@@ -364,7 +366,7 @@
         <x>20</x>
         <y>80</y>
         <width>251</width>
-        <height>164</height>
+        <height>211</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -517,8 +519,8 @@
      <widget class="QLineEdit" name="idLineEdit">
       <property name="geometry">
        <rect>
-        <x>88</x>
-        <y>31</y>
+        <x>120</x>
+        <y>30</y>
         <width>133</width>
         <height>20</height>
        </rect>
@@ -529,7 +531,7 @@
        <rect>
         <x>21</x>
         <y>31</y>
-        <width>61</width>
+        <width>101</width>
         <height>16</height>
        </rect>
       </property>
@@ -672,9 +674,9 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>110</y>
-        <width>251</width>
-        <height>151</height>
+        <y>100</y>
+        <width>255</width>
+        <height>205</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_9">
@@ -857,9 +859,9 @@
      <widget class="QPushButton" name="deleteBookButton">
       <property name="geometry">
        <rect>
-        <x>100</x>
+        <x>120</x>
         <y>310</y>
-        <width>101</width>
+        <width>141</width>
         <height>23</height>
        </rect>
       </property>
@@ -873,7 +875,7 @@
         <x>280</x>
         <y>20</y>
         <width>231</width>
-        <height>48</height>
+        <height>67</height>
        </rect>
       </property>
       <layout class="QFormLayout" name="formLayout_2">
@@ -902,9 +904,9 @@
      <widget class="QPushButton" name="addAuthorButton">
       <property name="geometry">
        <rect>
-        <x>394</x>
-        <y>80</y>
-        <width>111</width>
+        <x>350</x>
+        <y>90</y>
+        <width>161</width>
         <height>23</height>
        </rect>
       </property>
@@ -918,7 +920,7 @@
         <x>280</x>
         <y>120</y>
         <width>256</width>
-        <height>192</height>
+        <height>211</height>
        </rect>
       </property>
      </widget>
@@ -940,10 +942,10 @@
      <widget class="QWidget" name="formLayoutWidget_3">
       <property name="geometry">
        <rect>
-        <x>190</x>
-        <y>30</y>
-        <width>160</width>
-        <height>80</height>
+        <x>180</x>
+        <y>10</y>
+        <width>171</width>
+        <height>104</height>
        </rect>
       </property>
       <layout class="QFormLayout" name="formLayout_3">
@@ -980,7 +982,7 @@
       <property name="geometry">
        <rect>
         <x>140</x>
-        <y>110</y>
+        <y>120</y>
         <width>256</width>
         <height>192</height>
        </rect>
@@ -991,10 +993,10 @@
      <widget class="QWidget" name="formLayoutWidget_4">
       <property name="geometry">
        <rect>
-        <x>190</x>
-        <y>30</y>
-        <width>160</width>
-        <height>80</height>
+        <x>180</x>
+        <y>10</y>
+        <width>171</width>
+        <height>104</height>
        </rect>
       </property>
       <layout class="QFormLayout" name="formLayout_4">
@@ -1044,7 +1046,7 @@
       <property name="geometry">
        <rect>
         <x>140</x>
-        <y>110</y>
+        <y>120</y>
         <width>256</width>
         <height>192</height>
        </rect>
@@ -1075,7 +1077,7 @@
      <x>0</x>
      <y>0</y>
      <width>609</width>
-     <height>21</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>
